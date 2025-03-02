@@ -1,0 +1,14 @@
+restaurant_management_system/
+├── node_modules/
+├── public/
+│   ├── index.html         # Login page
+│   ├── register.html
+│   ├── chef.html
+│   ├── waiter.html
+│   └── script.js
+├── server/
+│   ├── models/
+│   │   └── User.js
+│   └── app.js            # Main server file
+├── package.json
+└── package-lock.json

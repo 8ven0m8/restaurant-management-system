@@ -1,0 +1,79 @@
+body{
+    text-align: center;
+}
+
+#container{
+    margin: 120px auto;
+    background-color: lightgray;
+    max-width: 30%;
+    height: 500px;
+    box-shadow: 0px 0px 16px 8px gray;
+    border-radius: 15px;
+}
+
+input{
+    margin-top: 20px;
+    width: 80%;
+    height: 50px;
+    font-size: 20px;
+    padding-left: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px 3px lightgray;
+    border: none;
+}
+#inputs{
+    padding-top: 20px;
+}
+#Login-text{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 40px;
+    font-weight: bold;
+    color: green;
+}
+#submit-btn{
+    margin-top: 80px;
+    width: 50%;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 15px;
+    border: none;
+    background-color: green;
+    color: white;
+}
+#submit-btn:hover{
+    cursor: pointer;
+    border: none;
+    background-color: darkgreen;
+    color: white;
+}
+#Reg-text{
+    margin-top: 10px;
+    font-size: 18px;
+}
+select{
+    text-align: center;
+    margin-top: 20px;
+    width: 40%;
+    height: 40px;
+    font-size: 20px;
+    padding-left: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px 3px lightgray;
+    border: none;
+}
+#reg-button{
+    margin-top: 20px;
+    width: 50%;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 15px;
+    border: none;
+    background-color: green;
+    color: white;
+}
+#reg-button:hover{
+    cursor: pointer;
+    border: none;
+    background-color: darkgreen;
+    color: white;
+}
