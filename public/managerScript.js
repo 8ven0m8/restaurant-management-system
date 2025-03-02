@@ -1,31 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
     const addButton = document.getElementById('add-button');
     const container = document.getElementById('container');
-
-    // Load initial menu items from database
+    
     const loadMenuItems = async () => {
         try {
             const response = await fetch('/api/menu');
-            if (!response.ok) throw new Error('Failed to fetch menu');
+            if (!response.ok) throw new Error('Failed to fetch menu items');
             const items = await response.json();
             renderItems(items);
         } catch (error) {
             console.error('Error:', error);
-            container.innerHTML = '<div class="error-message">Failed to load menu. Please refresh.</div>';
+            container.innerHTML = '<div class="error-message">Failed to load menu items</div>';
         }
     };
 
-    // Render menu items
     const renderItems = (items) => {
         container.innerHTML = items.length === 0 
-            ? '<div class="empty-message">Add items for menu +</div>'
+            ? '<div class="empty-message">Add items for menu +</div>' 
             : '';
-
+        
         items.forEach(item => {
             const card = document.createElement('div');
             card.className = 'item-card';
             card.innerHTML = `
-                <button class="delete-btn" aria-label="Delete item" data-id="${item._id}">
+                <button class="delete-btn" aria-label="Delete item">
                     <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
                         <path d="M6 6L18 18M6 18L18 6" stroke-linecap="round"/>
                     </svg>
@@ -41,24 +39,16 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             // Add delete functionality
-            card.querySelector('.delete-btn').addEventListener('click', async () => {
+            const deleteBtn = card.querySelector('.delete-btn');
+            deleteBtn.addEventListener('click', async () => {
                 try {
-                    const response = await fetch(`/api/menu/${item._id}`, {
-                        method: 'DELETE'
-                    });
-                    
-                    if (!response.ok) throw new Error('Delete failed');
-                    
-                    card.style.opacity = '0';
-                    setTimeout(() => {
-                        card.remove();
-                        if (!container.querySelector('.item-card')) {
-                            container.innerHTML = '<div class="empty-message">Add items for menu +</div>';
-                        }
-                    }, 300);
+                    await fetch(`/api/menu/${item._id}`, { method: 'DELETE' });
+                    card.remove();
+                    if (container.children.length === 0) {
+                        container.innerHTML = '<div class="empty-message">Add items for menu +</div>';
+                    }
                 } catch (error) {
-                    console.error('Delete error:', error);
-                    alert('Failed to delete item. Please try again.');
+                    console.error('Delete failed:', error);
                 }
             });
 
@@ -66,10 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Handle new item submission
-    addButton.addEventListener('click', async (e) => {
-        e.preventDefault();
-
+    // Add new item
+    addButton.addEventListener('click', async () => {
         const newItem = {
             name: document.getElementById('item-name').value.trim(),
             description: document.getElementById('item-desc').value.trim(),
@@ -77,46 +65,31 @@ document.addEventListener('DOMContentLoaded', () => {
             imageUrl: document.getElementById('image-url').value.trim()
         };
 
-        // Validation
         if (!newItem.name || isNaN(newItem.price)) {
-            alert('Please provide at least a valid name and price');
+            alert('Please provide valid item name and price');
             return;
         }
 
         try {
             const response = await fetch('/api/menu', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newItem)
             });
 
-            if (!response.ok) throw new Error('Failed to save item');
-            
-            const savedItem = await response.json();
-            
-            // Add new item to display
-            if (container.querySelector('.empty-message')) {
-                container.innerHTML = '';
+            if (response.ok) {
+                const savedItem = await response.json();
+                const cards = container.querySelectorAll('.item-card');
+                container.innerHTML = ''; // Clear existing items
+                renderItems([savedItem, ...cards.map(card => {
+                    return {
+                        _id: card.dataset.id,
+                        ...JSON.parse(card.dataset.item)
+                    }
+                })]);
             }
-            
-            const card = document.createElement('div');
-            card.className = 'item-card';
-            card.innerHTML = `
-                <!-- Same card structure as above -->
-            `;
-            container.appendChild(card);
-
-            // Clear form
-            document.getElementById('image-url').value = '';
-            document.getElementById('item-name').value = '';
-            document.getElementById('item-desc').value = '';
-            document.getElementById('item-price').value = '';
-
         } catch (error) {
-            console.error('Submission error:', error);
-            alert('Failed to save item. Please try again.');
+            console.error('Submission failed:', error);
         }
     });
 

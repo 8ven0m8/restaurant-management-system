@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurtant Management System</title>
-    <link rel="stylesheet" href="waiterStyles.css">
+    <title>Chef Interface</title>
+    <link rel="stylesheet" href="chefStyles.css">
 </head>
 <body>
-    <h1>Chef Interface</h1>
-    <p id="debug-message"></p>
-    <script>
-        document.getElementById('debug-message').textContent = 'Successfully logged in as Chef';
-    </script>
-    <script src="waiterScript.js"></script>
+    <div class="manager-container">
+        <h1>Orders Queue</h1>
+        <div id="orders-container"></div>
+    </div>
+    <script src="chefScript.js"></script>
 </body>
 </html>

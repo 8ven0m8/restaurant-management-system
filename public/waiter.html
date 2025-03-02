@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Waiter View</title>
-    <link rel="stylesheet" href="managerStyles.css">
+    <link rel="stylesheet" href="waiterStyles.css">
 </head>
 <body>
     <div class="manager-container">
-        <div id="container" class="menu-grid">
-            <div class="loading-message">Loading menu...</div>
+        <div id="container" class="menu-grid"></div>
+        <div class="order-container">
+            <h2>Selected Items</h2>
+            <div id="selected-items"></div>
+            <button id="place-order-btn">Place Order</button>
         </div>
     </div>
     <script src="waiterScript.js"></script>

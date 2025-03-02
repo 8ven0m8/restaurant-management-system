@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 // User Model
 const User = require('./models/User');
 const MenuItem = require('./models/MenuItem');
+const Order = require('./models/Order');
 
 // Routes
 app.get('/', (req, res) => {
@@ -107,7 +108,47 @@ app.delete('/api/menu/:id', async (req, res) => {
     }
 });
 
+// Order Routes
+app.post('/api/orders', async (req, res) => {
+    try {
+        const newOrder = new Order({
+            items: req.body.items
+        });
+        
+        const savedOrder = await newOrder.save();
+        res.status(201).json(savedOrder);
+    } catch (error) {
+        res.status(400).json({ error: 'Failed to create order' });
+    }
+});
+
+app.get('/api/orders', async (req, res) => {
+    try {
+        const orders = await Order.find({ status: 'pending' })
+            .populate('items.itemId')
+            .sort({ createdAt: 1 });
+        res.json(orders);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch orders' });
+    }
+});
+
+app.patch('/api/orders/:id/complete', async (req, res) => {
+    try {
+        const order = await Order.findByIdAndUpdate(
+            req.params.id,
+            { status: 'completed' },
+            { new: true }
+        );
+        res.json(order);
+    } catch (error) {
+        res.status(400).json({ error: 'Failed to complete order' });
+    }
+});
+
 // Server Start
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+
+
