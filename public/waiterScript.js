@@ -3,17 +3,61 @@ document.addEventListener('DOMContentLoaded', async () => {
     const selectedContainer = document.getElementById('selected-items');
     const placeOrderBtn = document.getElementById('place-order-btn');
     const tableNumberSelect = document.getElementById('table-number');
+    const completedOrdersContainer = document.getElementById('completed-orders');
     let selectedItems = new Map();
   
     // Load menu items
     const loadMenu = async () => {
-      try {
-        const response = await fetch('/api/menu');
-        const items = await response.json();
-        renderMenu(items);
-      } catch (error) {
-        menuContainer.innerHTML = '<div class="error-message">Failed to load menu</div>';
-      }
+        try {
+            const [menuResponse, completedResponse] = await Promise.all([
+                fetch('/api/menu'),
+                fetch('/api/orders/completed')
+            ]);
+            
+            const items = await menuResponse.json();
+            const completedOrders = await completedResponse.json();
+            
+            renderMenu(items);
+            renderCompletedOrders(completedOrders);
+        } catch (error) {
+            menuContainer.innerHTML = '<div class="error-message">Failed to load data</div>';
+        }
+    };
+
+    const loadCompletedOrders = async () => {
+        try {
+            const response = await fetch('/api/orders/completed');
+            const orders = await response.json();
+            renderCompletedOrders(orders);
+        } catch (error) {
+            console.error('Error loading completed orders:', error);
+        }
+    };
+
+    const renderCompletedOrders = (orders) => {
+        completedOrdersContainer.innerHTML = orders.length ? '' : '<div class="empty-message">No completed orders yet</div>';
+        
+        orders.forEach(order => {
+            const orderCard = document.createElement('div');
+            orderCard.className = 'completed-order-card';
+            orderCard.innerHTML = `
+                <div class="completed-order-header">
+                    <span class="completed-order-table">Table ${order.tableNumber}</span>
+                    <span class="completed-order-time">
+                        ${new Date(order.createdAt).toLocaleString()}
+                    </span>
+                </div>
+                <div class="completed-order-items">
+                    ${order.items.map(item => `
+                        <div class="order-item">
+                            <span>${item.itemId.name}</span>
+                            <span>× ${item.quantity}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            completedOrdersContainer.prepend(orderCard); // Newest first
+        });
     };
   
     // Render menu items
@@ -107,6 +151,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('Failed to place order');
       }
     });
+
   
     // Global functions for template
     window.updateQuantity = (event) => {
@@ -122,4 +167,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   
     loadMenu();
   });
+
+  setInterval(() => {
+    loadCompletedOrders();
+    }, 5000);
+
+  loadCompletedOrders();
   

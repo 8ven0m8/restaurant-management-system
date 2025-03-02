@@ -1,3 +1,38 @@
+.completed-orders-container {
+    margin-top: 40px;
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.completed-order-card {
+    background: white;
+    border-left: 4px solid #28a745;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.completed-order-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.completed-order-table {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.completed-order-time {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.completed-order-items {
+    margin-top: 10px;
+}
 .table-selection {
     margin: 15px 0;
     display: flex;

@@ -146,16 +146,19 @@ app.post('/api/orders', async (req, res) => {
 });
 
 app.patch('/api/orders/:id/complete', async (req, res) => {
-  try {
-    const order = await Order.findByIdAndUpdate(
-      req.params.id,
-      { status: 'completed' },
-      { new: true }
-    );
-    res.json(order);
-  } catch (error) {
-    res.status(400).json({ error: 'Failed to complete order' });
-  }
+    try {
+        const order = await Order.findByIdAndUpdate(
+            req.params.id,
+            { 
+                status: 'completed',
+                completedAt: new Date() // Add completion timestamp
+            },
+            { new: true }
+        );
+        res.json(order);
+    } catch (error) {
+        res.status(400).json({ error: 'Failed to complete order' });
+    }
 });
 
 // Server Start
