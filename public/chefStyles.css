@@ -6,6 +6,24 @@
     box-shadow: 0 3px 15px rgba(0,0,0,0.1);
 }
 
+.orders-section {
+    margin-bottom: 30px;
+}
+
+.order-card.completed {
+    background: #f8fff8;
+    border: 1px solid #28a745;
+}
+
+.order-card.completed .order-header h3 {
+    color: #28a745;
+}
+
+.order-status {
+    color: #666;
+    font-style: italic;
+}
+
 .order-item {
     display: flex;
     justify-content: space-between;

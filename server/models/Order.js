@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
+    tableNumber: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 20
+    },
     items: [{
         itemId: {
             type: mongoose.Schema.Types.ObjectId,
@@ -23,5 +29,6 @@ const orderSchema = new mongoose.Schema({
         default: Date.now
     }
 });
+
 
 module.exports = mongoose.model('Order', orderSchema);

@@ -1,3 +1,14 @@
+.table-selection {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.table-selection select {
+    padding: 8px;
+    border-radius: 5px;
+}
 .order-container {
     background: white;
     padding: 20px;
