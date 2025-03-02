@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Menu Manager</title>
+    <link rel="stylesheet" href="managerStyles.css">
 </head>
 <body>
-    This is managers interface
+    <div class="manager-container">
+        <div class="add-form">
+            <div class="form-grid">
+                <input type="text" id="image-url" placeholder="Image URL">
+                <input type="text" id="item-name" placeholder="Item name" required>
+                <textarea id="item-desc" placeholder="Description" rows="2"></textarea>
+                <input type="number" id="item-price" placeholder="Price" step="0.01" required>
+            </div>
+            <div class="button-container">
+                <button id="add-button">Add Item</button>
+            </div>
+        </div>
+
+        <div id="container">
+            <div class="empty-message">Add items for menu +</div>
+        </div>
+    </div>
+
+    <script src="managerScript.js"></script>
 </body>
 </html>

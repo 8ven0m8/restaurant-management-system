@@ -18,12 +18,14 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // User Model
 const User = require('./models/User');
+const MenuItem = require('./models/MenuItem');
 
 // Routes
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
+// User Registration
 app.post('/api/register', async (req, res) => {
     try {
         const { email, password, role } = req.body;
@@ -47,6 +49,7 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
+// User Login
 app.post('/api/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -69,6 +72,42 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
+// Menu Item Routes
+app.get('/api/menu', async (req, res) => {
+    try {
+        const items = await MenuItem.find().sort({ createdAt: -1 });
+        res.json(items);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch menu items' });
+    }
+});
+
+app.post('/api/menu', async (req, res) => {
+    try {
+        const newItem = new MenuItem({
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            imageUrl: req.body.imageUrl
+        });
+        
+        const savedItem = await newItem.save();
+        res.status(201).json(savedItem);
+    } catch (error) {
+        res.status(400).json({ error: 'Failed to create menu item' });
+    }
+});
+
+app.delete('/api/menu/:id', async (req, res) => {
+    try {
+        await MenuItem.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Item deleted successfully' });
+    } catch (error) {
+        res.status(400).json({ error: 'Failed to delete item' });
+    }
+});
+
+// Server Start
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
