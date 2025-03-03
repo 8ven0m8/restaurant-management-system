@@ -1,0 +1,104 @@
+[{
+  "_id": {
+    "$oid": "67c4b4a6d0369e540afd07c6"
+  },
+  "name": "Momo",
+  "description": "Delicious Momo",
+  "price": 159,
+  "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Momo_nepal.jpg/440px-Momo_nepal.jpg",
+  "createdAt": {
+    "$date": "2025-03-02T19:42:30.299Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c53337e776c4c5b90e0192"
+  },
+  "name": "Spaghetti",
+  "description": "Italian Spaghetti, original flavors.",
+  "price": 149,
+  "imageUrl": "https://www.inspiredtaste.net/wp-content/uploads/2019/03/Spaghetti-with-Meat-Sauce-Recipe-2-1200.jpg",
+  "createdAt": {
+    "$date": "2025-03-03T04:42:31.142Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c533f1e776c4c5b90e0195"
+  },
+  "name": "Thakali Khana Set",
+  "description": "Taste the delight of Nepal\n(Non Veg)",
+  "price": 359,
+  "imageUrl": "https://whatthenepal.com/wp-content/uploads/2024/03/Jimbuthakali-1024x683-1.jpg",
+  "createdAt": {
+    "$date": "2025-03-03T04:45:37.597Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c534a6e776c4c5b90e0198"
+  },
+  "name": "Chicken Tandoori",
+  "description": "Indian style cooking technique which gives a juicy flavor.",
+  "price": 179,
+  "imageUrl": "https://www.hungrylankan.com/wp-content/uploads/2022/12/dosa-and-sambar-1.jpg",
+  "createdAt": {
+    "$date": "2025-03-03T04:48:38.014Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c536c2e776c4c5b90e01e7"
+  },
+  "name": "Chicken Butter Masala",
+  "description": "The hearty butter chicken tops the chart of Indian chicken curries.",
+  "price": 349,
+  "imageUrl": "https://www.licious.in/blog/wp-content/uploads/2020/10/butter-chicken-.jpg",
+  "createdAt": {
+    "$date": "2025-03-03T04:57:38.121Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c53776e776c4c5b90e01ea"
+  },
+  "name": "Chicken Manchurian",
+  "description": "Crispy chicken enveloped in a spicy, tangy, sweet sauce",
+  "price": 189,
+  "imageUrl": "https://www.teaforturmeric.com/wp-content/uploads/2022/10/Chicken-Manchurian-11.jpg",
+  "createdAt": {
+    "$date": "2025-03-03T05:00:38.861Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c537f9e776c4c5b90e01ed"
+  },
+  "name": "Sushi Roll",
+  "description": "Sushi rolls, those iconic creations in Japanese cuisine, are like flavor-packed delights waiting to be unwrapped in every bite.",
+  "price": 199,
+  "imageUrl": "https://japanesetaste.in/cdn/shop/articles/how-to-make-makizushi-sushi-rolls-japanese-taste.jpg?v=1707914944&width=2560",
+  "createdAt": {
+    "$date": "2025-03-03T05:02:49.533Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c53863e776c4c5b90e01f0"
+  },
+  "name": "BBQ Pizza",
+  "description": "This BBQ chicken pizza has spicy barbecue sauce, diced chicken, peppers, onion, and cilantro, all covered with cheese and baked to bubbly goodness!",
+  "price": 299,
+  "imageUrl": "https://www.allrecipes.com/thmb/GaPoTsU1nxkKlmrhYgVHRglGFs0=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/AR-24878-bbq-chicken-pizza-beauty-4x3-39cd80585ad04941914dca4bd82eae3d.jpg",
+  "createdAt": {
+    "$date": "2025-03-03T05:04:35.552Z"
+  },
+  "__v": 0
+}]
