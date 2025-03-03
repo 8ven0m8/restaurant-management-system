@@ -1,10 +1,10 @@
 body{
     text-align: center;
+    background-image: url('https://img.freepik.com/free-vector/sketches-arabic-food-pattern_23-2147543047.jpg?t=st=1740985698~exp=1740989298~hmac=9f752a866aeaab23f0fc09c57983aecf336dbd6bdbc8cf29824479eb7ecb28cf&w=2000');
 }
-
 #container{
     margin: 120px auto;
-    background-color: lightgray;
+    background-color: rgba(234, 234, 227, 0.388);
     max-width: 30%;
     height: 500px;
     box-shadow: 0px 0px 16px 8px gray;
@@ -28,7 +28,7 @@ input{
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 40px;
     font-weight: bold;
-    color: green;
+    color: black;
 }
 #submit-btn{
     margin-top: 80px;
@@ -49,6 +49,7 @@ input{
 #Reg-text{
     margin-top: 10px;
     font-size: 18px;
+    color: black;
 }
 select{
     text-align: center;

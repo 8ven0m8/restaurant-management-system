@@ -1,3 +1,6 @@
+body{
+    background-image: url('https://img.freepik.com/free-vector/sketches-arabic-food-pattern_23-2147543047.jpg?t=st=1740985698~exp=1740989298~hmac=9f752a866aeaab23f0fc09c57983aecf336dbd6bdbc8cf29824479eb7ecb28cf&w=2000');
+}
 .completed-orders-container {
     margin-top: 40px;
     background: #f8f9fa;
@@ -83,7 +86,6 @@
 /* Manager Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f2f5;
     margin: 0;
     padding: 20px;
 }
