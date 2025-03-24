@@ -161,6 +161,19 @@ app.patch('/api/orders/:id/complete', async (req, res) => {
     }
 });
 
+app.patch('/api/orders/:id/pay', async (req, res) => {
+  try {
+      const order = await Order.findByIdAndUpdate(
+          req.params.id,
+          { paid: true },
+          { new: true }
+      );
+      res.json(order);
+  } catch (error) {
+      res.status(400).json({ error: 'Payment failed' });
+  }
+});
+
 // Server Start
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

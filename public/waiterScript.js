@@ -43,17 +43,25 @@ document.addEventListener('DOMContentLoaded', async () => {
             orderCard.innerHTML = `
                 <div class="completed-order-header">
                     <span class="completed-order-table">Table ${order.tableNumber}</span>
-                    <span class="completed-order-time">
-                        ${new Date(order.createdAt).toLocaleString()}
-                    </span>
+                    <div class="payment-status">
+                        ${order.paid ? 
+                            '<span class="paid-badge">Paid</span>' : 
+                            `<button class="pay-btn" data-amount="${calculateTotal(order)}">Pay Now</button>`
+                        }
+                        <span class="completed-order-time">
+                            ${new Date(order.completedAt).toLocaleString()}
+                        </span>
+                    </div>
                 </div>
-                <div class="completed-order-items">
-                    ${order.items.map(item => `
-                        <div class="order-item">
-                            <span>${item.itemId.name}</span>
-                            <span>× ${item.quantity}</span>
-                        </div>
-                    `).join('')}
+                ${order.items.map(item => `
+                    <div class="order-item">
+                        <span>${item.itemId.name}</span>
+                        <span>× ${item.quantity}</span>
+                        <span>₹${(item.itemId.price * item.quantity).toFixed(2)}</span>
+                    </div>
+                `).join('')}
+                <div class="order-total">
+                    Total: ₹${calculateTotal(order).toFixed(2)}
                 </div>
             `;
             completedOrdersContainer.prepend(orderCard); // Newest first
@@ -151,6 +159,30 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('Failed to place order');
       }
     });
+
+    document.querySelectorAll('.pay-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+          const orderId = btn.closest('.completed-order-card').dataset.order;
+          const amount = btn.dataset.amount;
+          
+          try {
+              await fetch(`/api/orders/${orderId}/pay`, { method: 'PATCH' });
+              await initiateUPIPayment(amount);
+              loadCompletedOrders(); // Refresh
+          } catch (error) {
+              alert('Payment failed. Please try again.');
+          }
+      });
+    });
+    const calculateTotal = (order) => {
+      return order.items.reduce((sum, item) => sum + (item.itemId.price * item.quantity), 0);
+    };
+  
+    const initiateUPIPayment = (amount) => {
+        const upiId = 'sapkotapranjal25@oksbi'; // Replace with your UPI ID
+        const paymentLink = `upi://pay?pa=${upiId}&pn=Restaurant&am=${amount}&cu=INR`;
+        window.location.href = paymentLink;
+    };
 
   
     // Global functions for template

@@ -30,7 +30,12 @@ const orderSchema = new mongoose.Schema({
     },
     completedAt: {
         type: Date
-    }
+    },
+    paid: {
+        type: Boolean,
+        default: false
+    },
+    paymentId: String
 });
 
 
