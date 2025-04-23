@@ -53,7 +53,3 @@ Access the application:
 Open your browser and navigate to http://localhost:3000.
 
 Feel free to contribute or raise issues to enhance the system's functionality.
-
----
-
-Let me know if you'd like to add badges, deployment instructions, or any other details!
